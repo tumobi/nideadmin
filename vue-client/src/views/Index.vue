@@ -81,6 +81,7 @@
 
 <script>
 import menus from '../config/menu'
+import helper from '../libs/helper'
 export default {
   name: 'Home',
   data: function () {
@@ -95,9 +96,9 @@ export default {
     }
   },
   methods: {
-    onLogout () {
-      localStorage.removeItem('admin_token')
-      localStorage.removeItem('admin_user')
+    async onLogout () {
+      await helper.removeStorage('admin_token')
+      await helper.removeStorage('admin_user')
       this.$router.push({ name: 'login' })
     },
     _setSidebarMenu () {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import iView from 'iview'
+import helper from '../libs/helper'
 
 // 加载菜单配置，在后台加载
 import menus from '../config/menu'
@@ -43,9 +44,15 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   // 检测登录状态
-  if (to.name !== 'login' && !localStorage.getItem('admin_token')) {
+  let adminToken = ''
+  try {
+    adminToken = await helper.getStorage('admin_token')
+  } catch (err) {
+    adminToken = ''
+  }
+  if (to.name !== 'login' && !adminToken) {
     return router.push({
       name: 'login'
     })

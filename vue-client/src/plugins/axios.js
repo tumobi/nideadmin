@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import iView from 'iview'
+import helper from '../libs/helper'
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -13,14 +14,19 @@ let config = {
   // withCredentials: true, // Check cross-site Access-Control
 }
 
-axios.defaults.headers.common['X-Admin-Token'] = localStorage.getItem('admin_token') || ''
 axios.defaults.headers.common['X-Admin-Version'] = '1.0.0'
 
 const _axios = axios.create(config)
 
 _axios.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
+  async function (config) {
+    let adminToken = ''
+    try {
+      adminToken = await helper.getStorage('admin_token')
+    } catch (err) {
+      adminToken = ''
+    }
+    config.headers['X-Admin-Token'] = adminToken
     return config
   },
   function (error) {

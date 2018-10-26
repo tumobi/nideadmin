@@ -33,6 +33,7 @@
 
 <script>
 import config from '../config/config'
+import helper from '../libs/helper.js'
 export default {
   name: 'Login',
   data () {
@@ -85,9 +86,9 @@ export default {
             captcha: this.formData.captcha
           }
         )
+        await helper.setStorage('admin_token', result.token)
+        await helper.setStorage('admin_user', JSON.stringify(result.user))
         this.$Message.success('登录成功')
-        localStorage.setItem('admin_token', result.token)
-        localStorage.setItem('admin_user', JSON.stringify(result.user))
         setTimeout(() => {
           this.loading = false
           this.$router.push({ name: 'home-summary' })
