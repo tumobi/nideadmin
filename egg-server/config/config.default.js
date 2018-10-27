@@ -9,5 +9,15 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+  config.jwt = {
+    secret: 'f40499b377933f39cc9e7634323669e0',
+  };
+
   return config;
 };

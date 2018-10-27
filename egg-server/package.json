@@ -5,7 +5,9 @@
   "private": true,
   "dependencies": {
     "egg": "^2.2.1",
-    "egg-scripts": "^2.5.0"
+    "egg-scripts": "^2.5.0",
+    "egg-validate": "^2.0.2",
+    "jsonwebtoken": "^8.3.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
