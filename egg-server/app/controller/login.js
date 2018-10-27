@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 const svgCaptcha = require('svg-captcha');
 const BaseController = require('./base');
+const menus = require('../../config/menu');
 
 class LoginController extends BaseController {
   async login() {
@@ -36,7 +37,7 @@ class LoginController extends BaseController {
     // 返回登录成功信息
     const user = { id: 1, username: 'admin', avatar: '' };
     const token = jwt.sign({ user_id: 1 }, this.config.jwt.secret);
-    this.success({ user, token });
+    this.success({ user, token, menus });
   }
 
   async captcha() {

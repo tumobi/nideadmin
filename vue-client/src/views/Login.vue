@@ -34,7 +34,6 @@
 <script>
 import config from '../config/config'
 import helper from '../libs/helper.js'
-import menus from '../config/menu'
 import store from '../store.js'
 export default {
   name: 'Login',
@@ -89,11 +88,11 @@ export default {
           }
         )
         // 设置导航菜单
-        store.commit('setMenus', menus)
+        store.commit('setMenus', result.menus)
 
         await helper.setStorage('admin_token', result.token)
         await helper.setStorage('admin_user', JSON.stringify(result.user))
-        await helper.setStorage('menus', menus)
+        await helper.setStorage('menus', result.menus)
         this.$Message.success('登录成功')
         setTimeout(() => {
           this.loading = false
