@@ -34,6 +34,8 @@
 <script>
 import config from '../config/config'
 import helper from '../libs/helper.js'
+import menus from '../config/menu'
+import store from '../store.js'
 export default {
   name: 'Login',
   data () {
@@ -86,8 +88,12 @@ export default {
             captcha: this.formData.captcha
           }
         )
+        // 设置导航菜单
+        store.commit('setMenus', menus)
+
         await helper.setStorage('admin_token', result.token)
         await helper.setStorage('admin_user', JSON.stringify(result.user))
+        await helper.setStorage('menus', menus)
         this.$Message.success('登录成功')
         setTimeout(() => {
           this.loading = false

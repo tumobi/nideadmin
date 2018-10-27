@@ -63,7 +63,7 @@
         <div class="na-sider">
           <div class="title">控制台</div>
           <ul class="na-sidebar">
-            <li v-for="item in sidebars" :key="item.name">
+            <li v-for="item in currentMenu.children" :key="item.name">
               <router-link :to="{name: item.route}" :class="{active: item.active}">
                 <Icon :type="item.icon" size="24"></Icon>
                 <div class="text">{{ item.name }}</div>
@@ -80,39 +80,24 @@
 </template>
 
 <script>
-import menus from '../config/menu'
+import { mapState } from 'vuex'
 import helper from '../libs/helper'
 export default {
   name: 'Home',
   data: function () {
     return {
-      menus: menus,
-      sidebars: menus[0].children
     }
   },
-  watch: {
-    $route (to, from) {
-      this._setSidebarMenu()
-    }
-  },
+  computed: mapState([
+    'menus',
+    'currentMenu'
+  ]),
   methods: {
     async onLogout () {
       await helper.removeStorage('admin_token')
       await helper.removeStorage('admin_user')
       this.$router.push({ name: 'login' })
-    },
-    _setSidebarMenu () {
-    // 设置侧边栏导航
-      for (const item of this.menus) {
-        if (item.active) {
-          this.sidebars = item.children
-          break
-        }
-      }
     }
-  },
-  mounted () {
-    this._setSidebarMenu()
   }
 }
 </script>
