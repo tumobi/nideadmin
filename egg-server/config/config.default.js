@@ -16,10 +16,9 @@ module.exports = appInfo => {
   };
 
   config.cors = {
-    origin: 'http://localhost:8080',
+    origin: '*',
     allowHeaders: 'Authorization,Origin, X-Requested-With, Content-Type, Accept, X-Admin-Token, X-Admin-Version',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-    credentials: true,
   };
 
   config.cache = {
