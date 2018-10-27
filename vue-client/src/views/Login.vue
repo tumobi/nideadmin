@@ -91,7 +91,7 @@ export default {
         store.commit('setMenus', result.menus)
 
         await helper.setStorage('admin_token', result.token)
-        await helper.setStorage('admin_user', JSON.stringify(result.user))
+        await helper.setStorage('admin_user', result.user)
         await helper.setStorage('menus', result.menus)
         this.$Message.success('登录成功')
         setTimeout(() => {
