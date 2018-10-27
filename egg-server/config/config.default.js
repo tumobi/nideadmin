@@ -22,6 +22,17 @@ module.exports = appInfo => {
     credentials: true,
   };
 
+  config.cache = {
+    default: 'memory',
+    stores: {
+      memory: {
+        driver: 'memory',
+        max: 100,
+        ttl: 3600 * 3,
+      },
+    },
+  };
+
   config.jwt = {
     secret: 'f40499b377933f39cc9e7634323669e0',
   };

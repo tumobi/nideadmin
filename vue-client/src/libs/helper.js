@@ -1,4 +1,5 @@
 import localforage from 'localforage'
+const uuidv4 = require('uuid/v4')
 
 localforage.config({
   name: 'NideAdmin'
@@ -24,6 +25,10 @@ helper.removeStorage = async (key) => {
 helper.clearStorage = async () => {
   const result = await localforage.clear()
   return result
+}
+
+helper.uuid = function () {
+  return uuidv4()
 }
 
 export default helper

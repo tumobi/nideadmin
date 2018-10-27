@@ -18,6 +18,11 @@ class BaseController extends Controller {
   post(name) {
     return this.ctx.request.body[name];
   }
+
+  // 获取 get 数据
+  query(name) {
+    return this.ctx.query[name];
+  }
 }
 
 module.exports = BaseController;

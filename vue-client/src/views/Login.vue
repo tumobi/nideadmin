@@ -40,7 +40,8 @@ export default {
   data () {
     return {
       loading: false,
-      captcahUrl: config.adminApiBaseUrl + 'login/captcha?v=' + Date.now(),
+      captcahUrl: '',
+      captchaKey: '',
       formData: {
         username: '',
         password: '',
@@ -84,7 +85,8 @@ export default {
           {
             username: this.formData.username,
             password: this.formData.password,
-            captcha: this.formData.captcha
+            captcha: this.formData.captcha,
+            key: this.captchaKey
           }
         )
         // 设置导航菜单
@@ -109,9 +111,13 @@ export default {
     onChangeCaptcha () {
       // 更改验证码，并清空输入的验证码
       this.formData.captcha = ''
-      this.captcahUrl =
-        config.adminApiBaseUrl + 'login/captcha?v=' + Date.now()
+      this.captchaKey = helper.uuid()
+      this.captcahUrl = config.adminApiBaseUrl + 'login/captcha?key=' + this.captchaKey
     }
+  },
+  mounted () {
+    this.captchaKey = helper.uuid()
+    this.captcahUrl = config.adminApiBaseUrl + 'login/captcha?key=' + this.captchaKey
   }
 }
 </script>

@@ -11,3 +11,8 @@ exports.cors = {
   enable: true,
   package: 'egg-cors',
 };
+
+exports.cache = {
+  enable: true,
+  package: 'egg-cache',
+};
