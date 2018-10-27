@@ -55,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
     // 检测菜单
-    if (!Array.isArray(store.state.menus) || store.state.menus.length <= 0) {
+    if (to.name !== 'login' && (!Array.isArray(store.state.menus) || store.state.menus.length <= 0)) {
       const localMenus = await helper.getStorage('menus') || []
       if (localMenus.length <= 0) {
         return router.push({
