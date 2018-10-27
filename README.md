@@ -20,5 +20,9 @@ npm run serve
 npm run build
 ```
 
+### 演示账号
++ 用户名：admin
++ 密码：nideadmin
+
 ### 效果展示
 TODO
