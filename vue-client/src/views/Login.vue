@@ -97,7 +97,7 @@ export default {
         this.$Message.success('登录成功')
         setTimeout(() => {
           this.loading = false
-          this.$router.push({ name: 'home-summary' })
+          this.$router.push({ name: 'home_summary' })
         }, 1000)
       } catch (err) {
         this.onChangeCaptcha()
