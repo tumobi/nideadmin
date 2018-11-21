@@ -1,6 +1,8 @@
 'use strict';
 const jwt = require('jsonwebtoken');
 const svgCaptcha = require('svg-captcha');
+const md5 = require('md5');
+const only = require('only');
 const BaseController = require('./base');
 const menus = require('../../config/menu');
 
@@ -32,15 +34,21 @@ class LoginController extends BaseController {
       return;
     }
 
-    if (username !== 'admin' || password !== 'nideadmin') {
+    const user = await this.ctx.model.User.findByUsername(username);
+    if (!user) {
+      this.error(400, '用户不存在');
+      return;
+    }
+
+    const passwordMd5 = md5(password + 'nideadmin' + user.password_salt);
+    if (passwordMd5 !== user.password) {
       this.error(400, '用户名或密码错误');
       return;
     }
 
     // 返回登录成功信息
-    const user = { id: 1, username: 'admin', avatar: '' };
     const token = jwt.sign({ user_id: 1 }, this.config.jwt.secret);
-    this.success({ user, token, menus });
+    this.success({ user: only(user, [ 'id', 'username', 'avatar' ]), token, menus });
   }
 
   async captcha() {
