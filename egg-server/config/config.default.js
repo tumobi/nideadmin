@@ -36,5 +36,14 @@ module.exports = appInfo => {
     secret: 'f40499b377933f39cc9e7634323669e0',
   };
 
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    database: 'nideadmin',
+    username: 'root',
+    password: 'root',
+  };
+
   return config;
 };

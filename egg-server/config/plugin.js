@@ -16,3 +16,8 @@ exports.cache = {
   enable: true,
   package: 'egg-cache',
 };
+
+exports.sequelize = {
+  enable: true,
+  package: 'egg-sequelize',
+};
